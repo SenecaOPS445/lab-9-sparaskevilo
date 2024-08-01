@@ -1,0 +1,14 @@
+---
+# Global variables
+- name: update motd file # File description 
+  hosts: sparaskevilo # Which host in host file
+  user: student # Remote user account 
+  vars: # Variables used by yaml file
+    apache_version: 2.6
+    motd_warning: "Warning: used by ICT faculty/students only.\n"
+    testserver: yes
+  tasks: # List of task
+    - name: setup a motd # Name of task
+      copy: # Module being used
+        dest: /etc/motd # Commands specific to module the copy command will be in dest /etc/motd
+        content: "{{ motd_warning }}" # Placing the contents of motd_warning into specified destination

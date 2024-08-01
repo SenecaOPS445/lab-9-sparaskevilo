@@ -1,0 +1,16 @@
+# A playbook to install and start Apache server
+---
+- hosts: sparaskevilo # Specify host
+  user: student # Remote user account
+  become: yes # Use sudo
+  vars: # variables
+    apache_version: 2.6
+    motd_warning: "Warning: used by ICT faculty/students only. \n"
+    testserver: yes
+  tasks:
+    - name: install apache # Name of task install apache
+      action: yum name=httpd state=installed # Call yum command to install
+    - name: restart apache # Name of task restart apache
+      service: # Call command to restart httpd service sudo systemctl restart httpd
+        name: httpd
+        state: restarted
