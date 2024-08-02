@@ -1,0 +1,73 @@
+---
+- hosts: sparaskevilo
+  user: student
+  become: yes
+
+# Update Apache
+  tasks:
+    - name: Update Apache
+      action: yum name=httpd state=latest
+
+# Install extra pacakges repository for EPEL
+
+    - name: Add EPEL repository
+      ansible.builtin.yum_repository:
+        name: epel
+        description: EPEL YUM repo # Trying to run playbook without description generated error message
+        baseurl: https://dl.fedoraproject.org/pub/epel/$releasever/$basearch/ #releasever release number of centos. basearch the architecture
+# Remove tree
+
+    - name: Remove tree command
+      action: yum name=tree state=absent
+
+# Change hostname to sparaskevilo
+
+    - name: Change hostname
+      ansible.builtin.hostname:
+        name: sparaskevilo
+        use: systemd
+
+# Create a new sudo user and add them to wheel for sudo access
+
+    - name: User sparaskevilo
+      ansible.builtin.user:
+        name: sparaskevilo
+        comment: Sandra Paraskevilo
+        group: wheel
+
+# Configure new user account to ssh into it without password. Create directory with permission first and copy key
+
+    - name: Create ssh directory
+      ansible.builtin.file:
+        path: /home/sparaskevilo/.ssh
+        state: directory
+        owner: sparaskevilo
+        mode: '700'
+
+    - name: Create authorized_keys file
+      ansible.builtin.file:
+        path: /home/sparaskevilo/.ssh/authorized_keys
+        state: touch
+        owner: sparaskevilo
+        mode: '600'
+    
+    - name: Copy public key from host to authorized_keys file in remote machine
+      ansible.builtin.copy:
+        src: /Users/sandraparaskevilo/.ssh/id_ed25519.pub
+        dest: /home/sparaskevilo/.ssh/authorized_keys
+
+# Use a loop to create a ops lab directory structure lab1 - lab9
+    - name: Create a ops45 directory structure
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /home/sparaskevilo/ops445/lab1
+        - /home/sparaskevilo/ops445/lab2
+        - /home/sparaskevilo/ops445/lab3
+        - /home/sparaskevilo/ops445/lab4
+        - /home/sparaskevilo/ops445/lab5
+        - /home/sparaskevilo/ops445/lab6
+        - /home/sparaskevilo/ops445/lab7
+        - /home/sparaskevilo/ops445/lab8
+        - /home/sparaskevilo/ops445/lab9
