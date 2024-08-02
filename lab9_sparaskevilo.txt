@@ -1,0 +1,44 @@
+
+PLAY [sparaskevilo] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [sparaskevilo]
+
+TASK [Update Apache] ***********************************************************
+ok: [sparaskevilo]
+
+TASK [Add EPEL repository] *****************************************************
+ok: [sparaskevilo]
+
+TASK [Remove tree command] *****************************************************
+ok: [sparaskevilo]
+
+TASK [Change hostname] *********************************************************
+ok: [sparaskevilo]
+
+TASK [User sparaskevilo] *******************************************************
+ok: [sparaskevilo]
+
+TASK [Create ssh directory] ****************************************************
+ok: [sparaskevilo]
+
+TASK [Create authorized_keys file] *********************************************
+changed: [sparaskevilo]
+
+TASK [Copy public key from host to authorized_keys file in remote machine] *****
+ok: [sparaskevilo]
+
+TASK [Create a ops45 directory structure] **************************************
+ok: [sparaskevilo] => (item=/home/sparaskevilo/ops445/lab1)
+ok: [sparaskevilo] => (item=/home/sparaskevilo/ops445/lab2)
+ok: [sparaskevilo] => (item=/home/sparaskevilo/ops445/lab3)
+ok: [sparaskevilo] => (item=/home/sparaskevilo/ops445/lab4)
+ok: [sparaskevilo] => (item=/home/sparaskevilo/ops445/lab5)
+ok: [sparaskevilo] => (item=/home/sparaskevilo/ops445/lab6)
+ok: [sparaskevilo] => (item=/home/sparaskevilo/ops445/lab7)
+ok: [sparaskevilo] => (item=/home/sparaskevilo/ops445/lab8)
+ok: [sparaskevilo] => (item=/home/sparaskevilo/ops445/lab9)
+
+PLAY RECAP *********************************************************************
+sparaskevilo               : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
